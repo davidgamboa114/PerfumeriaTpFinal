@@ -121,7 +121,7 @@
     <value>true</value>
   </data>
   <data name="UrlApi" xml:space="preserve">
-    <value>&#x8;https://perfumeriamatt.azurewebsites.net/</value>
+    <value>&#x8;https://perfumeriamatt.azurewebsites.net/api/</value>
   </data>
   <data name="UrlApiLocal" xml:space="preserve">
     <value>&#x8;http://localhost:5047/api/</value>

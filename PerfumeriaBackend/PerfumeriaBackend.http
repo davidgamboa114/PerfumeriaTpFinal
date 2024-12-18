@@ -1,6 +1,6 @@
-@BackendPerfumeria_HostAddress = http://localhost:5145
+@PerfumeriaBackend_HostAddress = http://localhost:5145
 
-GET {{BackendPerfumeria_HostAddress}}/weatherforecast/
+GET {{PerfumeriaBackend_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

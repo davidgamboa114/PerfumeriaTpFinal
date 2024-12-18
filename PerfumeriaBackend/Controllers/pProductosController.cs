@@ -12,11 +12,11 @@ namespace PerfumeriaBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class pProductoController : ControllerBase
+    public class pProductosController : ControllerBase
     {
         private readonly PerfumeriaContext _context;
 
-        public pProductoController(PerfumeriaContext context)
+        public pProductosController(PerfumeriaContext context)
         {
             _context = context;
         }

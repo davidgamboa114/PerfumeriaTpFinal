@@ -12,47 +12,47 @@ namespace PerfumeriaBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductoesController : ControllerBase
+    public class pUsuariosController : ControllerBase
     {
         private readonly PerfumeriaContext _context;
 
-        public ProductoesController(PerfumeriaContext context)
+        public pUsuariosController(PerfumeriaContext context)
         {
             _context = context;
         }
 
-        // GET: api/Productoes
+        // GET: api/Usuarios
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Producto>>> GetProductos()
+        public async Task<ActionResult<IEnumerable<pUsuario>>> GetUsuario()
         {
-            return await _context.pProductos.ToListAsync();
+            return await _context.Usuario.ToListAsync();
         }
 
-        // GET: api/Productoes/5
+        // GET: api/Usuarios/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Producto>> GetProducto(long id)
+        public async Task<ActionResult<pUsuario>> GetUsuario(int id)
         {
-            var producto = await _context.pProductos.FindAsync(id);
+            var usuario = await _context.Usuario.FindAsync(id);
 
-            if (producto == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return producto;
+            return usuario;
         }
 
-        // PUT: api/Productoes/5
+        // PUT: api/Usuarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducto(long id, Producto producto)
+        public async Task<IActionResult> PutUsuario(int id, pUsuario usuario)
         {
-            if (id != producto.Id)
+            if (id != usuario.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(producto).State = EntityState.Modified;
+            _context.Entry(usuario).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace PerfumeriaBackend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductoExists(id))
+                if (!UsuarioExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace PerfumeriaBackend.Controllers
             return NoContent();
         }
 
-        // POST: api/Productoes
+        // POST: api/Usuarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Producto>> PostProducto(Producto producto)
+        public async Task<ActionResult<pUsuario>> PostUsuario(pUsuario usuario)
         {
-            _context.pProductos.Add(producto);
+            _context.Usuario.Add(usuario);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProducto", new { id = producto.Id }, producto);
+            return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
         }
 
-        // DELETE: api/Productoes/5
+        // DELETE: api/Usuarios/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProducto(long id)
+        public async Task<IActionResult> DeleteUsuario(int id)
         {
-            var producto = await _context.pProductos.FindAsync(id);
-            if (producto == null)
+            var usuario = await _context.Usuario.FindAsync(id);
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            _context.pProductos.Remove(producto);
+            _context.Usuario.Remove(usuario);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ProductoExists(long id)
+        private bool UsuarioExists(int id)
         {
-            return _context.pProductos.Any(e => e.Id == id);
+            return _context.Usuario.Any(e => e.Id == id);
         }
     }
 }

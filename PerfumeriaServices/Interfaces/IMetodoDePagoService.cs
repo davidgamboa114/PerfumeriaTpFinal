@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace PerfumeriaServices.Interfaces
 {
-    internal interface IMetodoDePagoService : IGenericService<MetodoDePago>
+    internal interface IMetodoDePagoService : IGenericService<pMetodoDePago>
     {
-        public Task<List<MetodoDePago>?> GetAllAsync(string? filtro);
-        public Task<List<MetodoDePago>?> GetAllDeletedAsync(string? filtro);
+        public Task<List<pMetodoDePago>?> GetAllAsync(string? filtro);
+        public Task<List<pMetodoDePago>?> GetAllDeletedAsync(string? filtro);
 
     }
 }

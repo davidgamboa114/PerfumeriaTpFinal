@@ -3,7 +3,7 @@ using PerfumeriaServices.Enums;
 
 namespace PerfumeriaServices.Models
 {
-    public class Usuario
+    public class pUsuario
     {
         public int Id { get; set; }
         public string NombreUsuario { get; set; } = string.Empty;

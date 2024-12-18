@@ -12,47 +12,47 @@ namespace PerfumeriaBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VentasController : ControllerBase
+    public class pProductoesController : ControllerBase
     {
         private readonly PerfumeriaContext _context;
 
-        public VentasController(PerfumeriaContext context)
+        public pProductoesController(PerfumeriaContext context)
         {
             _context = context;
         }
 
-        // GET: api/Ventas
+        // GET: api/Productoes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Venta>>> GetVentas()
+        public async Task<ActionResult<IEnumerable<pProducto>>> GetProductos()
         {
-            return await _context.pVentas.ToListAsync();
+            return await _context.pProductos.ToListAsync();
         }
 
-        // GET: api/Ventas/5
+        // GET: api/Productoes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Venta>> GetVenta(long id)
+        public async Task<ActionResult<pProducto>> GetProducto(long id)
         {
-            var venta = await _context.pVentas.FindAsync(id);
+            var producto = await _context.pProductos.FindAsync(id);
 
-            if (venta == null)
+            if (producto == null)
             {
                 return NotFound();
             }
 
-            return venta;
+            return producto;
         }
 
-        // PUT: api/Ventas/5
+        // PUT: api/Productoes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVenta(long id, Venta venta)
+        public async Task<IActionResult> PutProducto(long id, pProducto producto)
         {
-            if (id != venta.Id)
+            if (id != producto.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(venta).State = EntityState.Modified;
+            _context.Entry(producto).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace PerfumeriaBackend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VentaExists(id))
+                if (!ProductoExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace PerfumeriaBackend.Controllers
             return NoContent();
         }
 
-        // POST: api/Ventas
+        // POST: api/Productoes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Venta>> PostVenta(Venta venta)
+        public async Task<ActionResult<pProducto>> PostProducto(pProducto producto)
         {
-            _context.pVentas.Add(venta);
+            _context.pProductos.Add(producto);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVenta", new { id = venta.Id }, venta);
+            return CreatedAtAction("GetProducto", new { id = producto.Id }, producto);
         }
 
-        // DELETE: api/Ventas/5
+        // DELETE: api/Productoes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVenta(long id)
+        public async Task<IActionResult> DeleteProducto(long id)
         {
-            var venta = await _context.pVentas.FindAsync(id);
-            if (venta == null)
+            var producto = await _context.pProductos.FindAsync(id);
+            if (producto == null)
             {
                 return NotFound();
             }
 
-            _context.pVentas.Remove(venta);
+            _context.pProductos.Remove(producto);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool VentaExists(long id)
+        private bool ProductoExists(long id)
         {
-            return _context.pVentas.Any(e => e.Id == id);
+            return _context.pProductos.Any(e => e.Id == id);
         }
     }
 }

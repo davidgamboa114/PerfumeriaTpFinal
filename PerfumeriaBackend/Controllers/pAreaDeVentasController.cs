@@ -12,47 +12,47 @@ namespace PerfumeriaBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MetodoDePagoesController : ControllerBase
+    public class pAreaDeVentasController : ControllerBase
     {
         private readonly PerfumeriaContext _context;
 
-        public MetodoDePagoesController(PerfumeriaContext context)
+        public pAreaDeVentasController(PerfumeriaContext context)
         {
             _context = context;
         }
 
-        // GET: api/MetodoDePagoes
+        // GET: api/AreaDeVentas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MetodoDePago>>> GetMetodosDePago()
+        public async Task<ActionResult<IEnumerable<pAreaDeVenta>>> GetAreasDeVenta()
         {
-            return await _context.pMetodosDePago.ToListAsync();
+            return await _context.pAreasDeVenta.ToListAsync();
         }
 
-        // GET: api/MetodoDePagoes/5
+        // GET: api/AreaDeVentas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<MetodoDePago>> GetMetodoDePago(long id)
+        public async Task<ActionResult<pAreaDeVenta>> GetAreaDeVenta(long id)
         {
-            var metodoDePago = await _context.pMetodosDePago.FindAsync(id);
+            var areaDeVenta = await _context.pAreasDeVenta.FindAsync(id);
 
-            if (metodoDePago == null)
+            if (areaDeVenta == null)
             {
                 return NotFound();
             }
 
-            return metodoDePago;
+            return areaDeVenta;
         }
 
-        // PUT: api/MetodoDePagoes/5
+        // PUT: api/AreaDeVentas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMetodoDePago(long id, MetodoDePago metodoDePago)
+        public async Task<IActionResult> PutAreaDeVenta(long id, pAreaDeVenta areaDeVenta)
         {
-            if (id != metodoDePago.Id)
+            if (id != areaDeVenta.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(metodoDePago).State = EntityState.Modified;
+            _context.Entry(areaDeVenta).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace PerfumeriaBackend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MetodoDePagoExists(id))
+                if (!AreaDeVentaExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace PerfumeriaBackend.Controllers
             return NoContent();
         }
 
-        // POST: api/MetodoDePagoes
+        // POST: api/AreaDeVentas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<MetodoDePago>> PostMetodoDePago(MetodoDePago metodoDePago)
+        public async Task<ActionResult<pAreaDeVenta>> PostAreaDeVenta(pAreaDeVenta areaDeVenta)
         {
-            _context.pMetodosDePago.Add(metodoDePago);
+            _context.pAreasDeVenta.Add(areaDeVenta);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMetodoDePago", new { id = metodoDePago.Id }, metodoDePago);
+            return CreatedAtAction("GetAreaDeVenta", new { id = areaDeVenta.Id }, areaDeVenta);
         }
 
-        // DELETE: api/MetodoDePagoes/5
+        // DELETE: api/AreaDeVentas/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMetodoDePago(long id)
+        public async Task<IActionResult> DeleteAreaDeVenta(long id)
         {
-            var metodoDePago = await _context.pMetodosDePago.FindAsync(id);
-            if (metodoDePago == null)
+            var areaDeVenta = await _context.pAreasDeVenta.FindAsync(id);
+            if (areaDeVenta == null)
             {
                 return NotFound();
             }
 
-            _context.pMetodosDePago.Remove(metodoDePago);
+            _context.pAreasDeVenta.Remove(areaDeVenta);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool MetodoDePagoExists(long id)
+        private bool AreaDeVentaExists(long id)
         {
-            return _context.pMetodosDePago.Any(e => e.Id == id);
+            return _context.pAreasDeVenta.Any(e => e.Id == id);
         }
     }
 }

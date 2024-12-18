@@ -12,47 +12,47 @@ namespace PerfumeriaBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class pMetodoDePagoesController : ControllerBase
     {
         private readonly PerfumeriaContext _context;
 
-        public UsuariosController(PerfumeriaContext context)
+        public pMetodoDePagoesController(PerfumeriaContext context)
         {
             _context = context;
         }
 
-        // GET: api/Usuarios
+        // GET: api/MetodoDePagoes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuario()
+        public async Task<ActionResult<IEnumerable<pMetodoDePago>>> GetMetodosDePago()
         {
-            return await _context.Usuario.ToListAsync();
+            return await _context.pMetodosDePago.ToListAsync();
         }
 
-        // GET: api/Usuarios/5
+        // GET: api/MetodoDePagoes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Usuario>> GetUsuario(int id)
+        public async Task<ActionResult<pMetodoDePago>> GetMetodoDePago(long id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
+            var metodoDePago = await _context.pMetodosDePago.FindAsync(id);
 
-            if (usuario == null)
+            if (metodoDePago == null)
             {
                 return NotFound();
             }
 
-            return usuario;
+            return metodoDePago;
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/MetodoDePagoes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
+        public async Task<IActionResult> PutMetodoDePago(long id, pMetodoDePago metodoDePago)
         {
-            if (id != usuario.Id)
+            if (id != metodoDePago.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(usuario).State = EntityState.Modified;
+            _context.Entry(metodoDePago).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace PerfumeriaBackend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuarioExists(id))
+                if (!MetodoDePagoExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace PerfumeriaBackend.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuarios
+        // POST: api/MetodoDePagoes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
+        public async Task<ActionResult<pMetodoDePago>> PostMetodoDePago(pMetodoDePago metodoDePago)
         {
-            _context.Usuario.Add(usuario);
+            _context.pMetodosDePago.Add(metodoDePago);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
+            return CreatedAtAction("GetMetodoDePago", new { id = metodoDePago.Id }, metodoDePago);
         }
 
-        // DELETE: api/Usuarios/5
+        // DELETE: api/MetodoDePagoes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuario(int id)
+        public async Task<IActionResult> DeleteMetodoDePago(long id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
-            if (usuario == null)
+            var metodoDePago = await _context.pMetodosDePago.FindAsync(id);
+            if (metodoDePago == null)
             {
                 return NotFound();
             }
 
-            _context.Usuario.Remove(usuario);
+            _context.pMetodosDePago.Remove(metodoDePago);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UsuarioExists(int id)
+        private bool MetodoDePagoExists(long id)
         {
-            return _context.Usuario.Any(e => e.Id == id);
+            return _context.pMetodosDePago.Any(e => e.Id == id);
         }
     }
 }

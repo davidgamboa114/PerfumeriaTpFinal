@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PerfumeriaServices.Models;
 
-public class AreaDeVenta
+public class pCliente
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -13,6 +13,11 @@ public class AreaDeVenta
     [Required]
     public string Nombre { get; set; }
 
-    //Eliminado
+    [Required]
+    [EmailAddress]
+    public string Correo { get; set; }
+
+    public string Telefono { get; set; }
     public bool IsDeleted { get; set; }
+
 }

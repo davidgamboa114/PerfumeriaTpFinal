@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PerfumeriaServices.Models;
 
-public class Cliente
+public class pMetodoDePago
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -12,12 +12,7 @@ public class Cliente
 
     [Required]
     public string Nombre { get; set; }
-
-    [Required]
-    [EmailAddress]
-    public string Correo { get; set; }
-
-    public string Telefono { get; set; }
     public bool IsDeleted { get; set; }
 
 }
+

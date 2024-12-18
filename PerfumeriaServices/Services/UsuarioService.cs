@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace PerfumeriaServices.Services
 {
-    public class UsuarioService : GenericService<Usuario>, IUsuarioService
+    public class UsuarioService : GenericService<pUsuario>, IUsuarioService
     {
-        public async Task<List<Usuario>?> GetAllAsync(string? filtro)
+        public async Task<List<pUsuario>?> GetAllAsync(string? filtro)
         {
             var response = await client.GetAsync($"{_endpoint}?filtro={filtro}");
             var content = await response.Content.ReadAsStringAsync();
@@ -19,10 +19,10 @@ namespace PerfumeriaServices.Services
             {
                 throw new ApplicationException(content?.ToString());
             }
-            return JsonSerializer.Deserialize<List<Usuario>>(content, options); ;
+            return JsonSerializer.Deserialize<List<pUsuario>>(content, options); ;
         }
 
-        public async Task<List<Usuario>?> GetAllDeletedAsync(string? filtro)
+        public async Task<List<pUsuario>?> GetAllDeletedAsync(string? filtro)
         {
             var response = await client.GetAsync($"{_endpoint}?filtro={filtro}");
             var content = await response.Content.ReadAsStringAsync();
@@ -33,7 +33,7 @@ namespace PerfumeriaServices.Services
             }
 
             // Deserializamos los itinerarios
-            var itineraries = JsonSerializer.Deserialize<List<Usuario>>(content, options);
+            var itineraries = JsonSerializer.Deserialize<List<pUsuario>>(content, options);
 
             // Filtramos los itinerarios eliminados (IsDeleted = true)
             return itineraries?.Where(i => i.IsDeleted).ToList();

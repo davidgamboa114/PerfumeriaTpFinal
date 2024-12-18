@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace PerfumeriaServices.Services
 {
-    internal class MetodoDePagoService : GenericService<MetodoDePago>, IMetodoDePagoService
+    internal class MetodoDePagoService : GenericService<pMetodoDePago>, IMetodoDePagoService
     {
-        public async Task<List<MetodoDePago>?> GetAllAsync(string? filtro)
+        public async Task<List<pMetodoDePago>?> GetAllAsync(string? filtro)
         {
             var response = await client.GetAsync($"{_endpoint}?filtro={filtro}");
             var content = await response.Content.ReadAsStringAsync();
@@ -19,10 +19,10 @@ namespace PerfumeriaServices.Services
             {
                 throw new ApplicationException(content?.ToString());
             }
-            return JsonSerializer.Deserialize<List<MetodoDePago>>(content, options); ;
+            return JsonSerializer.Deserialize<List<pMetodoDePago>>(content, options); ;
         }
 
-        public async Task<List<MetodoDePago>?> GetAllDeletedAsync(string? filtro)
+        public async Task<List<pMetodoDePago>?> GetAllDeletedAsync(string? filtro)
         {
             var response = await client.GetAsync($"{_endpoint}?filtro={filtro}");
             var content = await response.Content.ReadAsStringAsync();
@@ -33,7 +33,7 @@ namespace PerfumeriaServices.Services
             }
 
             // Deserializamos los itinerarios
-            var itineraries = JsonSerializer.Deserialize<List<MetodoDePago>>(content, options);
+            var itineraries = JsonSerializer.Deserialize<List<pMetodoDePago>>(content, options);
 
             // Filtramos los itinerarios eliminados (IsDeleted = true)
             return itineraries?.Where(i => i.IsDeleted).ToList();

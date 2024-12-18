@@ -12,25 +12,25 @@ namespace PerfumeriaBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientesController : ControllerBase
+    public class pClientesController : ControllerBase
     {
         private readonly PerfumeriaContext _context;
 
-        public ClientesController(PerfumeriaContext context)
+        public pClientesController(PerfumeriaContext context)
         {
             _context = context;
         }
 
         // GET: api/Clientes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
+        public async Task<ActionResult<IEnumerable<pCliente>>> GetClientes()
         {
             return await _context.pClientes.ToListAsync();
         }
 
         // GET: api/Clientes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cliente>> GetCliente(long id)
+        public async Task<ActionResult<pCliente>> GetCliente(long id)
         {
             var cliente = await _context.pClientes.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace PerfumeriaBackend.Controllers
         // PUT: api/Clientes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCliente(long id, Cliente cliente)
+        public async Task<IActionResult> PutCliente(long id, pCliente cliente)
         {
             if (id != cliente.Id)
             {
@@ -76,7 +76,7 @@ namespace PerfumeriaBackend.Controllers
         // POST: api/Clientes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
+        public async Task<ActionResult<pCliente>> PostCliente(pCliente cliente)
         {
             _context.pClientes.Add(cliente);
             await _context.SaveChangesAsync();

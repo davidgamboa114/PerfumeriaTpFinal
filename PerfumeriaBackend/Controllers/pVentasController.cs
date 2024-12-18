@@ -12,47 +12,47 @@ namespace PerfumeriaBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AreaDeVentasController : ControllerBase
+    public class pVentasController : ControllerBase
     {
         private readonly PerfumeriaContext _context;
 
-        public AreaDeVentasController(PerfumeriaContext context)
+        public pVentasController(PerfumeriaContext context)
         {
             _context = context;
         }
 
-        // GET: api/AreaDeVentas
+        // GET: api/Ventas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AreaDeVenta>>> GetAreasDeVenta()
+        public async Task<ActionResult<IEnumerable<pVenta>>> GetVentas()
         {
-            return await _context.pAreasDeVenta.ToListAsync();
+            return await _context.pVentas.ToListAsync();
         }
 
-        // GET: api/AreaDeVentas/5
+        // GET: api/Ventas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<AreaDeVenta>> GetAreaDeVenta(long id)
+        public async Task<ActionResult<pVenta>> GetVenta(long id)
         {
-            var areaDeVenta = await _context.pAreasDeVenta.FindAsync(id);
+            var venta = await _context.pVentas.FindAsync(id);
 
-            if (areaDeVenta == null)
+            if (venta == null)
             {
                 return NotFound();
             }
 
-            return areaDeVenta;
+            return venta;
         }
 
-        // PUT: api/AreaDeVentas/5
+        // PUT: api/Ventas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAreaDeVenta(long id, AreaDeVenta areaDeVenta)
+        public async Task<IActionResult> PutVenta(long id, pVenta venta)
         {
-            if (id != areaDeVenta.Id)
+            if (id != venta.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(areaDeVenta).State = EntityState.Modified;
+            _context.Entry(venta).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace PerfumeriaBackend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AreaDeVentaExists(id))
+                if (!VentaExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace PerfumeriaBackend.Controllers
             return NoContent();
         }
 
-        // POST: api/AreaDeVentas
+        // POST: api/Ventas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<AreaDeVenta>> PostAreaDeVenta(AreaDeVenta areaDeVenta)
+        public async Task<ActionResult<pVenta>> PostVenta(pVenta venta)
         {
-            _context.pAreasDeVenta.Add(areaDeVenta);
+            _context.pVentas.Add(venta);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAreaDeVenta", new { id = areaDeVenta.Id }, areaDeVenta);
+            return CreatedAtAction("GetVenta", new { id = venta.Id }, venta);
         }
 
-        // DELETE: api/AreaDeVentas/5
+        // DELETE: api/Ventas/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAreaDeVenta(long id)
+        public async Task<IActionResult> DeleteVenta(long id)
         {
-            var areaDeVenta = await _context.pAreasDeVenta.FindAsync(id);
-            if (areaDeVenta == null)
+            var venta = await _context.pVentas.FindAsync(id);
+            if (venta == null)
             {
                 return NotFound();
             }
 
-            _context.pAreasDeVenta.Remove(areaDeVenta);
+            _context.pVentas.Remove(venta);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool AreaDeVentaExists(long id)
+        private bool VentaExists(long id)
         {
-            return _context.pAreasDeVenta.Any(e => e.Id == id);
+            return _context.pVentas.Any(e => e.Id == id);
         }
     }
 }

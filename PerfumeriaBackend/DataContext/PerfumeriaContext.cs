@@ -16,12 +16,12 @@ namespace PerfumeriaBackend.DataContext
         }
 
         // DbSets
-        public DbSet<Cliente> pClientes { get; set; }
-        public DbSet<Producto> pProductos { get; set; }
-        public DbSet<MetodoDePago> pMetodosDePago { get; set; }
-        public DbSet<AreaDeVenta> pAreasDeVenta { get; set; }
-        public DbSet<Venta> pVentas { get; set; }
-        public DbSet<Usuario> pUsuario { get; set; }
+        public DbSet<pCliente> pClientes { get; set; }
+        public DbSet<pProducto> pProductos { get; set; }
+        public DbSet<pMetodoDePago> pMetodosDePago { get; set; }
+        public DbSet<pAreaDeVenta> pAreasDeVenta { get; set; }
+        public DbSet<pVenta> pVentas { get; set; }
+        public DbSet<pUsuario> pUsuario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -38,8 +38,8 @@ namespace PerfumeriaBackend.DataContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Datos semilla para Cliente
-            modelBuilder.Entity<Cliente>().HasData(
-                new Cliente
+            modelBuilder.Entity<pCliente>().HasData(
+                new pCliente
                 {
                     Id = 1,
                     Nombre = "Ana Gómez",
@@ -49,8 +49,8 @@ namespace PerfumeriaBackend.DataContext
             );
 
             // Datos semilla para AreaDeVenta
-            modelBuilder.Entity<AreaDeVenta>().HasData(
-                new AreaDeVenta
+            modelBuilder.Entity<pAreaDeVenta>().HasData(
+                new pAreaDeVenta
                 {
                     Id = 1,
                     Nombre = "Perfumes"
@@ -58,8 +58,8 @@ namespace PerfumeriaBackend.DataContext
             );
 
             // Datos semilla para Producto
-            modelBuilder.Entity<Producto>().HasData(
-                new Producto
+            modelBuilder.Entity<pProducto>().HasData(
+                new pProducto
                 {
                     Id = 1,
                     Nombre = "Perfume Chanel N°5",
@@ -69,8 +69,8 @@ namespace PerfumeriaBackend.DataContext
             );
 
             // Datos semilla para MetodoDePago
-            modelBuilder.Entity<MetodoDePago>().HasData(
-                new MetodoDePago
+            modelBuilder.Entity<pMetodoDePago>().HasData(
+                new pMetodoDePago
                 {
                     Id = 1,
                     Nombre = "Efectivo"
@@ -78,8 +78,8 @@ namespace PerfumeriaBackend.DataContext
             );
 
             // Datos semilla para Venta
-            modelBuilder.Entity<Venta>().HasData(
-                new Venta
+            modelBuilder.Entity<pVenta>().HasData(
+                new pVenta
                 {
                     Id = 1,
                     Fecha = DateTime.UtcNow,
@@ -91,8 +91,8 @@ namespace PerfumeriaBackend.DataContext
             );
 
             // Datos semilla para Usuario
-            modelBuilder.Entity<Usuario>().HasData(
-                new Usuario
+            modelBuilder.Entity<pUsuario>().HasData(
+                new pUsuario
                 {
                     Id = 1,
                     NombreUsuario = "admin",
@@ -102,7 +102,7 @@ namespace PerfumeriaBackend.DataContext
                 }
             );
         }
-        public DbSet<PerfumeriaServices.Models.Usuario> Usuario { get; set; } = default!;
+        public DbSet<PerfumeriaServices.Models.pUsuario> Usuario { get; set; } = default!;
 
 
     }

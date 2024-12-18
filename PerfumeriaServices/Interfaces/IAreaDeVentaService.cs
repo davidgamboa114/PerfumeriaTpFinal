@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace PerfumeriaServices.Interfaces
 {
-    public interface IAreaDeVentaService : IGenericService<AreaDeVenta>
+    public interface IAreaDeVentaService : IGenericService<pAreaDeVenta>
     {
-        public Task<List<AreaDeVenta>?> GetAllAsync(string? filtro);
-        public Task<List<AreaDeVenta>?> GetAllDeletedAsync(string? filtro);
+        public Task<List<pAreaDeVenta>?> GetAllAsync(string? filtro);
+        public Task<List<pAreaDeVenta>?> GetAllDeletedAsync(string? filtro);
 
     }
 }

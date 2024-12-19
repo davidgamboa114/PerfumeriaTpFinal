@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PerfumeriaServices.Services
 {
-    internal class MetodoDePagoService : GenericService<pMetodoDePago>, IMetodoDePagoService
+    public class MetodoDePagoService : GenericService<pMetodoDePago>, IMetodoDePagoService
     {
         public async Task<List<pMetodoDePago>?> GetAllAsync(string? filtro)
         {

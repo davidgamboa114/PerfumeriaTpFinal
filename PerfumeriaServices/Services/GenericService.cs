@@ -29,55 +29,67 @@ namespace PerfumeriaServices.Services
         public async Task<List<P>?> GetAllAsync()
         {
             var response = await client.GetAsync(_endpoint);
-            var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
-                throw new ApplicationException(content?.ToString());
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new ApplicationException($"Error: {response.StatusCode}, {errorContent}");
             }
-            return JsonSerializer.Deserialize<List<P>>(content, options); ;
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<List<P>>(content, options);
         }
+
         public async Task<List<P>?> GetAllDeletedAsync()
         {
             var response = await client.GetAsync($"{_endpoint}/Deleted");
-            var content = await response.Content.ReadAsStringAsync();
-
             if (!response.IsSuccessStatusCode)
             {
-                throw new ApplicationException(content?.ToString());
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new ApplicationException($"Error: {response.StatusCode}, {errorContent}");
             }
 
+            var content = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<List<P>>(content, options);
         }
 
         public async Task<P?> GetByIdAsync(int id)
         {
             var response = await client.GetAsync($"{_endpoint}/{id}");
-            var content = await response.Content.ReadAsStreamAsync();
             if (!response.IsSuccessStatusCode)
             {
-                throw new ApplicationException(content?.ToString());
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new ApplicationException($"Error: {response.StatusCode}, {errorContent}");
             }
+
+            var content = await response.Content.ReadAsStreamAsync();
             return JsonSerializer.Deserialize<P>(content, options);
         }
 
         public async Task<P?> AddAsync(P? entity)
         {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
             var response = await client.PostAsJsonAsync(_endpoint, entity);
-            var content = await response.Content.ReadAsStreamAsync();
             if (!response.IsSuccessStatusCode)
             {
-                throw new ApplicationException(content?.ToString());
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new ApplicationException($"Error: {response.StatusCode}, {errorContent}");
             }
+
+            var content = await response.Content.ReadAsStreamAsync();
             return JsonSerializer.Deserialize<P>(content, options);
         }
 
         public async Task UpdateAsync(P? entity)
         {
-            var idValue = entity.GetType().GetProperty("Id").GetValue(entity);
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
+            var idValue = entity.GetType().GetProperty("Id")?.GetValue(entity);
+            if (idValue == null) throw new ArgumentException("Entity does not have an Id property.");
+
             var response = await client.PutAsJsonAsync($"{_endpoint}/{idValue}", entity);
             if (!response.IsSuccessStatusCode)
             {
-                throw new ApplicationException(response?.ToString());
+                throw new ApplicationException($"Error: {response.StatusCode}, {await response.Content.ReadAsStringAsync()}");
             }
         }
 
@@ -86,10 +98,8 @@ namespace PerfumeriaServices.Services
             var response = await client.DeleteAsync($"{_endpoint}/{Id}");
             if (!response.IsSuccessStatusCode)
             {
-                throw new ApplicationException(response.ToString());
+                throw new ApplicationException($"Error: {response.StatusCode}, {await response.Content.ReadAsStringAsync()}");
             }
         }
-
     }
-
 }

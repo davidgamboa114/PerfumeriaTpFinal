@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PerfumeriaServices.Services
 {
-    internal class ClienteService : GenericService<pCliente>, IClienteService
+    public class ClienteService : GenericService<pCliente>, IClienteService
     {
         public async Task<List<pCliente>?> GetAllAsync(string? filtro)
         {
